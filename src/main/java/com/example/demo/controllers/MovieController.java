@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.example.demo.controllers;
 
-import com.example.demo.entity.Movie;
-import com.example.demo.service.MovieService;
+import com.example.demo.entities.Movie;
+import com.example.demo.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
