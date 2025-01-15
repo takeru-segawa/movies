@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Movie;
+import com.example.demo.exceptions.DuplicateMovieException;
 import com.example.demo.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class MovieService {
 
     public Movie createMovie(Movie movie) {
         if (movieRepository.findByMovieId(movie.getMovieId()).isPresent()) {
-            throw new IllegalArgumentException("Movie with movieId " + movie.getMovieId() + " already exists.");
+            throw new DuplicateMovieException("Movie with movieId " + movie.getMovieId() + " already exists.");
         }
 
         return movieRepository.save(movie);
