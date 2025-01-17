@@ -3,6 +3,8 @@ package com.example.demo.services;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,11 +26,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println("User found: " + user.getUsername());
         System.out.println("Encoded password: " + user.getPassword());
 
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole());
+
         // Chuyển User của bạn sang UserDetails
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(Collections.emptyList())
+                .authorities(Collections.singletonList(authority))
                 .build();
     }
 }
