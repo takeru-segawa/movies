@@ -5,6 +5,7 @@ import com.example.demo.services.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,11 +17,13 @@ public class LinkController {
     private LinkService linkService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Link> findAll() {
         return linkService.findAll();
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')") // can delete this line
     public ResponseEntity<Link> findById(@PathVariable String id) {
         try {
             Link link = linkService.findById(id);

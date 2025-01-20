@@ -14,6 +14,15 @@ public class Movie {
     private Integer movieId;
     private String title;
     private String genres;
+    private String owner;
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public void setId(String id) {
         this.id = id;
